@@ -31,4 +31,13 @@ public class Java17CollectionsTest extends BaseMapTest
         result = MAPPER.readValue(actualJson, List.class);
         assertEquals(input, result);
     }
+
+    public void testJava9StreamOfToSet() throws Exception
+    {
+        Set<String> letters =
+                Stream.of("a", "b", "c").collect(Collectors.toSet());
+        String json = MAPPER.writeValueAsString(letters);
+        Set<?> result = MAPPER.readValue(json, Set.class);
+        assertEquals(letters, result);
+    }
 }
